@@ -1,15 +1,15 @@
-// ignore: unused_import
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
-main() {
-  runApp(PerguntaApp());
-}
+main() => runApp(PerguntaApp());
 
-class PerguntaApp extends StatelessWidget {
+class PerguntaAppState extends State<PerguntaApp> {
+  var perguntaSelecionada = 0;
+
   void responder() {
-    print('Pergunta respondida');
+    setState(() {
+      perguntaSelecionada++;
+    });
+    print(perguntaSelecionada);
   }
 
   @override
@@ -18,14 +18,15 @@ class PerguntaApp extends StatelessWidget {
       'Qual a sua cor favorita?',
       'Qual o seu animal favorito?',
     ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: const Text('Perguntas'),
         ),
         body: Column(
           children: [
-            Text(perguntas[0]),
+            Text(perguntas[perguntaSelecionada]),
             RaisedButton(
               child: Text('Resposta 1'),
               onPressed: responder,
@@ -42,5 +43,14 @@ class PerguntaApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PerguntaApp extends StatefulWidget {
+  const PerguntaApp({Key? key}) : super(key: key);
+
+  @override
+  PerguntaAppState createState() {
+    return PerguntaAppState();
   }
 }
